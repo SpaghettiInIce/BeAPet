@@ -1,0 +1,49 @@
+-- Get the player
+local player = game.Players.LocalPlayer
+
+-- Enable player noclip
+local character = player.Character
+if character then
+    for _, part in pairs(character:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end
+end
+
+-- Enable camera noclip
+local SetConstant = (debug and debug.setconstant) or setconstant
+local GetConstants = (debug and debug.getconstants) or getconstants
+local getgc = getgc or get_gc_objects
+if SetConstant or GetConstants or getgc then
+    local Popper = player.PlayerScripts.PlayerModule.CameraModule.ZoomController.Popper
+    for _, v in pairs(getgc()) do
+        if type(v) == 'function' and getfenv(v).script == Popper then
+            for i, v1 in pairs(GetConstants(v)) do
+                if tonumber(v1) == 0.25 then
+                    SetConstant(v, i, 0)
+                elseif tonumber(v1) == 0 then
+                    SetConstant(v, i, 0.25)
+                end
+            end
+        end
+    end
+end
+
+-- Define the coordinates
+local x = 0
+local y = -5.7
+local z = 0
+
+-- Create a new part or block
+local part = Instance.new("Part")
+part.Size = Vector3.new(999, 1, 999) -- Adjust the size as needed
+part.Position = Vector3.new(x, y, z)
+part.Anchored = true
+part.Transparency = 1
+part.Parent = workspace
+
+-- Move the player down
+player.Character:SetPrimaryPartCFrame(CFrame.new(player.Character.PrimaryPart.Position + Vector3.new(0, -9, 0)))
+game.Players.LocalPlayer.DisplayName = "Fishy"
+game.Players.LocalPlayer.Name = "I am a Fish :0"
