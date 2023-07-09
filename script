@@ -47,3 +47,5 @@ part.Parent = workspace
 player.Character:SetPrimaryPartCFrame(CFrame.new(player.Character.PrimaryPart.Position + Vector3.new(0, -9, 0)))
 game.Players.LocalPlayer.DisplayName = "Fishy"
 game.Players.LocalPlayer.Name = "I am a Fish :0"
+game.Players.LocalPlayer.Character.Humanoid.JumpHeight = 0
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 0
